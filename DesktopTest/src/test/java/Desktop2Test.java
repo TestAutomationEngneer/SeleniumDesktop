@@ -4,15 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.winium.DesktopOptions;
 import org.openqa.selenium.winium.WiniumDriver;
-import org.openqa.selenium.winium.WiniumDriverService;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DesktopTest {
+public class Desktop2Test {
 
 
     public DesktopOptions options;
@@ -27,14 +25,6 @@ public class DesktopTest {
         options = new DesktopOptions();
         options.setApplicationPath("C:\\Windows\\System32\\calc.exe");
 
-//        File driverPath = new File("C:\\Users\\hryci\\Desktop\\selenium\\Winium.Desktop.Driver\\Winium.Desktop.Driver.exe");
-//        WiniumDriverService service = new WiniumDriverService.Builder()
-//                .usingDriverExecutable(driverPath)
-//                .usingAnyFreePort()
-//                .withVerbose(true)
-//                .withSilent(false)
-//                .buildDesktopService();
-//        WiniumDriver driver = new WiniumDriver(service, options);
 
         driver = new WiniumDriver(new URL("http://localhost:9999"), options);
 
@@ -45,11 +35,24 @@ public class DesktopTest {
     public void testCalculator() throws InterruptedException, MalformedURLException {
 
         Thread.sleep(3000);
-        driver.findElement(By.id("num8Button")).click();
-//        driver.findElement(By.id("plusButton")).click();
-//        driver.findElement(By.id("num8Button")).click();
-//        driver.findElement(By.id("equalButton")).click();
-//        Thread.sleep(2000);
+        WebElement window =  driver.findElementByClassName("CalcFrame");
+//        WebElement menuItem = window.findElement(By.id("MenuBar")).findElement(By.name("View"));
+//        menuItem.click();
+//        driver.findElementByName("Scientific").click();
+//
+//        window.findElement(By.id("MenuBar")).findElement(By.name("View")).click();
+//        driver.findElementByName("History").click();
+//
+//        window.findElement(By.id("MenuBar")).findElement(By.name("View")).click();
+//        driver.findElementByName("History").click();
+//
+        window.findElement(By.id("MenuBar")).findElement(By.name("View")).click();
+        driver.findElementByName("Standard").click();
+
+//        driver.findElementByName("4").click();
+//        driver.findElementByName("Add").click();
+//        driver.findElementByName("5").click();
+//        driver.findElementByName("Equals").click();
 
         String result = driver.findElement(By.id("CalculatorResults")).getAttribute("Name");
         System.out.println("Result is: " + result);
